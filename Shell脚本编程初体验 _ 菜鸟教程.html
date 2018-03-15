@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://www.runoob.com/w3cnote/shell-scripting.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+  <meta property="qc:admins" content="465267610762567726375">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shell脚本编程初体验 | 菜鸟教程</title>
+
+  <link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="canonical" href="http://www.runoob.com/w3cnote/shell-scripting.html">
+<meta name="keywords" content="Shell脚本编程初体验">
+<meta name="description" content="通常，当人们提到“shell脚本语言”时，浮现在他们脑海中是bash，ksh，sh或者其它相类似的linux/unix脚本语言。脚本语言是与计算机交流的另外一种途径。使用图形化窗口界面（不管是windows还是linux都无所谓）用户可以移动鼠标并点击各种对象，比如按钮、列表、选框等等。但这种方式在每次用户想要计算机/服务器完成相同任务时（比如说批量转换照片，或者下载新的电影、mp3等）却是十分不方便。要想让所有这些事情变得简单并且自动..">
+		
+	<link rel="shortcut icon" href="http://static.runoob.com/images/favicon.ico" mce_href="//static.runoob.com/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./Shell脚本编程初体验 _ 菜鸟教程_files/style.css" type="text/css" media="all">	
+	<link rel="stylesheet" href="./Shell脚本编程初体验 _ 菜鸟教程_files/font-awesome.min.css" media="all">	
+  <!--[if gte IE 9]><!-->
+  <script src="./Shell脚本编程初体验 _ 菜鸟教程_files/hm.js.下载"></script><script src="./Shell脚本编程初体验 _ 菜鸟教程_files/jquery.min.js.下载"></script>
+  <!--<![endif]-->
+  <!--[if lt IE 9]>
+     <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+     <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+  <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+<link rel="stylesheet" type="text/css" href="./Shell脚本编程初体验 _ 菜鸟教程_files/prettify.css"><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body style="">
+
+<!--  头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="http://www.runoob.com/w3cnote/index.php">
+      <input class="placeholder" value="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="http://www.runoob.com/">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+        <div class="col right-list"> 
+    <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style=""> <i class="fa fa-navicon"></i> </button>
+    </div>
+        <div class="col search search-desktop last">
+      <form action="http://www.runoob.com/" target="_blank">
+        <input class="placeholder" id="s" name="s" value="搜索……" autocomplete="off">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- 导航栏 -->
+<div class="container navigation">
+	<div class="row">
+		<div class="col nav">
+			
+
+						<ul class="pc-nav" id="note-nav">
+				<li><a href="http://www.runoob.com/">首页</a></li>
+				<li><a href="http://www.runoob.com/w3cnote">笔记首页</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/android" title="Android 基础入门教程">Android</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/net-2" title="互联网">互联网</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/disorganized" title="杂乱无章">杂乱无章</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/tech" title="科技资讯">科技资讯</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/coderlife" title="程序员人生">程序员人生</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/joke" title="程序员笑话">程序员笑话</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/code" title="编程技术">编程技术</a></li> 
+			</ul>
+						
+      		
+			<ul class="mobile-nav">
+				<li><a href="http://www.runoob.com/w3cnote">首页</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/android" target="_blank" title="Android 基础入门教程">Android</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/coderlife" target="_blank" title="程序员人生">鸡汤</a></li>
+				<li><a href="http://www.runoob.com/w3cnote_genre/joke" target="_blank" title="程序员笑话">逗乐</a></li>
+				
+				<a href="javascript:void(0)" class="search-reveal">Search</a> 
+			</ul>
+			
+		</div>
+	</div>
+</div>
+
+
+<!--  内容  -->
+<div class="container main">
+	<div class="row">
+
+		<div class="col middle-column big-middle-column">
+	 			<div class="article">
+			<div class="article-heading">
+				<h2>Shell脚本编程初体验</h2>				<h3><em>分类</em> <a href="http://www.runoob.com/w3cnote_genre/code" title="编程技术">编程技术</a> </h3>
+			</div>
+			<div class="article-body">
+				<div class="article-intro">
+					<p>通常，当人们提到"shell脚本语言"时，浮现在他们脑海中是bash，ksh，sh或者其它相类似的linux/unix脚本语言。脚本语言是与计算机交流的另外一种途径。使用图形化窗口界面（不管是windows还是linux都无所谓）用户可以移动鼠标并点击各种对象，比如按钮、列表、选框等等。但这种方式在每次用户想要计算机/服务器完成相同任务时（比如说批量转换照片，或者下载新的电影、mp3等）却是十分不方便。要想让所有这些事情变得简单并且自动化，我们可以使用shell脚本。</p>
+<p>某些编程语言，像pascal、foxpro、C、java之类，在执行前需要先进行编译。它们需要合适的编译器来让我们的代码完成某个任务。</p>
+<p><img class="aligncenter" src="./Shell脚本编程初体验 _ 菜鸟教程_files/113720s46pren00n2681cr.jpg" alt="Shell脚本编程初体验" width="500" height="375"></p>
+<p>而其它一些编程语言，像php、javascript、visualbasic之类，则不需要编译器，因此它们需要解释器，而我们不需要编译代码就可以运行程序。</p>
+<p>shell脚本也像解释器一样，但它通常用于调用外部已编译的程序。然后，它会捕获输出结果、退出代码并根据情况进行处理。</p>
+<p>Linux世界中最为流行的shell脚本语言之一，就是bash。而我认为（这是我自己的看法）原因在于，默认情况下bash shell可以让用户便捷地通过历史命令（先前执行过的）导航，与之相反的是，ksh则要求对.profile进行一些调整，或者记住一些"魔术"组合键来查阅历史并修正命令。</p>
+<p>好了，我想这些介绍已经足够了，剩下来哪个环境最适合你，就留给你自己去判断吧。从现在开始，我将只讲bash及其脚本。在下面的例子中，我将使用CentOS 6.6和bash-4.1.2。请确保你有相同版本，或者更高版本。</p>
+<h2>Shell脚本流</h2>
+<p>shell脚本语言就跟和几个人聊天类似。你只需把所有命令想象成能帮你做事的那些人，只要你用正确的方式来请求他们去做。比如说，你想要写文档。首先，你需要纸。然后，你需要把内容说给某个人听，让他帮你写。最后，你想要把它存放到某个地方。或者说，你想要造一所房子，因而你需要请合适的人来清空场地。在他们说"事情干完了"，那么另外一些工程师就可以帮你来砌墙。最后，当这些工程师们也告诉你"事情干完了"的时候，你就可以叫油漆工来给房子粉饰了。如果你让油漆工在墙砌好前就来粉饰，会发生什么呢？我想，他们会开始发牢骚了。几乎所有这些像人一样的命令都会说话，如果它们完成了工作而没有发生什么问题，那么它们就会告诉"标准输出"。如果它们不能做你叫它们做的事——它们会告诉"标准错误"。这样，最后，所有的命令都通过"标准输入"来听你的话。</p>
+<p>快速实例——当你打开linux终端并写一些文本时——你正通过"标准输入"和bash说话。那么，让我们来问问bash shell <strong>who am i（我是谁？）</strong>吧。</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> who am i                                </span><span class="pun">&lt;---</span><span class="pln"> </span><span class="pun">你通过标准输入对</span><span class="pln"> bash shell </span><span class="pun">说</span><span class="pln">
+root     pts</span><span class="pun">/</span><span class="lit">0</span><span class="pln">        </span><span class="lit">2015</span><span class="pun">-</span><span class="lit">04</span><span class="pun">-</span><span class="lit">22</span><span class="pln"> </span><span class="lit">20</span><span class="pun">:</span><span class="lit">17</span><span class="pln"> </span><span class="pun">(</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">1.123</span><span class="pun">)</span><span class="pln">     </span><span class="pun">&lt;---</span><span class="pln"> bash shell</span><span class="pun">通过标准输出回答你</span></pre>
+<p>现在，让我们说一些bash听不懂的问题：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> blablabla           </span><span class="pun">&lt;---</span><span class="pln"> </span><span class="pun">哈，你又在和标准输入说话了</span><span class="pln">
+</span><span class="pun">-</span><span class="pln">bash</span><span class="pun">:</span><span class="pln"> blablabla</span><span class="pun">:</span><span class="pln"> command </span><span class="kwd">not</span><span class="pln"> found     </span><span class="pun">&lt;---</span><span class="pln"> bash</span><span class="pun">通过标准错误在发牢骚了</span></pre>
+<p>":"之前的第一个单词通常是向你发牢骚的命令。实际上，这些流中的每一个都有它们自己的索引号（LCTT 译注：文件句柄号）：</p>
+<ul>
+<li>标准输入（<strong>stdin</strong>） – 0</li>
+<li>标准输出（<strong>stdout</strong>） – 1</li>
+<li>标准错误（<strong>stderr</strong>） – 2</li>
+</ul>
+<p>如果你真的想要知道哪个输出命令说了些什么——你需要将那次发言重定向到（在命令后使用大于号"&gt;"和流索引）文件：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> blablabla </span><span class="lit">1</span><span class="pun">&gt;</span><span class="pln"> output</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">-</span><span class="pln">bash</span><span class="pun">:</span><span class="pln"> blablabla</span><span class="pun">:</span><span class="pln"> command </span><span class="kwd">not</span><span class="pln"> found</span></pre>
+<p>在本例中，我们试着重定向流1（<strong>stdout</strong>）到名为output.txt的文件。让我们来看对该文件内容所做的事情吧，使用cat命令可以做这事：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat output</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>看起来似乎是空的。好吧，现在让我们来重定向流2（<strong>stderr</strong>）：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> blablabla </span><span class="lit">2</span><span class="pun">&gt;</span><span class="pln"> error</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>好吧，我们看到牢骚话没了。让我们检查一下那个文件：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat error</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">-</span><span class="pln">bash</span><span class="pun">:</span><span class="pln"> blablabla</span><span class="pun">:</span><span class="pln"> command </span><span class="kwd">not</span><span class="pln"> found
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>果然如此！我们看到，所有牢骚话都被记录到errors.txt文件里头去了。</p>
+<p>有时候，命令会同时产生<strong>stdout</strong>和<strong>stderr</strong>。要重定向它们到不同的文件，我们可以使用以下语句：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">command </span><span class="lit">1</span><span class="pun">&gt;</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;</span><span class="pln">err</span><span class="pun">.</span><span class="pln">txt</span></pre>
+<p>要缩短一点语句，我们可以忽略"1"，因为默认情况下<strong>stdout</strong>会被重定向：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">command </span><span class="pun">&gt;</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;</span><span class="pln">err</span><span class="pun">.</span><span class="pln">txt</span></pre>
+<p>好吧，让我们试试做些"坏事"。让我们用rm命令把file1和folder1给删了吧：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> rm </span><span class="pun">-</span><span class="pln">vf folder1 file1 </span><span class="pun">&gt;</span><span class="pln"> </span><span class="kwd">out</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;</span><span class="pln">err</span><span class="pun">.</span><span class="pln">txt</span></pre>
+<p>现在来检查以下输出文件：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat </span><span class="kwd">out</span><span class="pun">.</span><span class="pln">txt
+removed </span><span class="str">`file1'
+[root@localhost ~]# cat err.txt
+rm: cannot remove `</span><span class="pln">folder1</span><span class="str">': Is a directory
+[root@localhost ~]#</span></pre>
+<p>正如我们所看到的，不同的流被分离到了不同的文件。有时候，这也不是很方便，因为我们想要查看出现错误时，在某些操作前面或后面所连续发生的事情。要实现这一目的，我们可以重定向两个流到同一个文件：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">command </span><span class="pun">&gt;&gt;</span><span class="pln">out_err</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;&gt;</span><span class="pln">out_err</span><span class="pun">.</span><span class="pln">txt</span></pre>
+<p>注意：请注意，我使用"&gt;&gt;"替代了"&gt;"。它允许我们附加到文件，而不是覆盖文件。</p>
+<p>我们也可以重定向一个流到另一个：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">command </span><span class="pun">&gt;</span><span class="pln">out_err</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;&amp;</span><span class="lit">1</span></pre>
+<p>让我来解释一下吧。所有命令的标准输出将被重定向到out_err.txt，错误输出将被重定向到流1（上面已经解释过了），而该流会被重定向到同一个文件。让我们看这个实例：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> rm </span><span class="pun">-</span><span class="pln">fv folder2 file2 </span><span class="pun">&gt;</span><span class="pln">out_err</span><span class="pun">.</span><span class="pln">txt </span><span class="lit">2</span><span class="pun">&gt;&amp;</span><span class="lit">1</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat out_err</span><span class="pun">.</span><span class="pln">txt
+rm</span><span class="pun">:</span><span class="pln"> cannot remove </span><span class="str">`folder2': Is a directory
+removed `</span><span class="pln">file2</span><span class="str">'
+[root@localhost ~]#</span></pre>
+<p>看着这些组合的输出，我们可以将其说明为：首先，<strong>rm</strong>命令试着将folder2删除，而它不会成功，因为linux要求<strong>-r</strong>键来允许<strong>rm</strong>命令删除文件夹，而第二个file2会被删除。通过为<strong>rm</strong>提供<strong>-v</strong>（详情）键，我们让rm命令告诉我们每个被删除的文件或文件夹。</p>
+<p>这些就是你需要知道的，关于重定向的几乎所有内容了。我是说几乎，因为还有一个更为重要的重定向工具，它称之为"管道"。通过使用|（管道）符号，我们通常重定向<strong>stdout</strong>流。</p>
+<p>比如说，我们有这样一个文本文件：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat text_file</span><span class="pun">.</span><span class="pln">txt
+</span><span class="typ">This</span><span class="pln"> line does </span><span class="kwd">not</span><span class="pln"> contain H e l l o  word
+</span><span class="typ">This</span><span class="pln"> lilne contains </span><span class="typ">Hello</span><span class="pln">
+</span><span class="typ">This</span><span class="pln"> also containd </span><span class="typ">Hello</span><span class="pln">
+</span><span class="typ">This</span><span class="pln"> one </span><span class="kwd">no</span><span class="pln"> due to HELLO all capital
+</span><span class="typ">Hello</span><span class="pln"> bash world</span><span class="pun">!</span></pre>
+<p>而我们需要找到其中某些带有"Hello"的行，Linux中有个<strong>grep</strong>命令可以完成该工作：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> grep </span><span class="typ">Hello</span><span class="pln"> text_file</span><span class="pun">.</span><span class="pln">txt
+</span><span class="typ">This</span><span class="pln"> lilne contains </span><span class="typ">Hello</span><span class="pln">
+</span><span class="typ">This</span><span class="pln"> also containd </span><span class="typ">Hello</span><span class="pln">
+</span><span class="typ">Hello</span><span class="pln"> bash world</span><span class="pun">!</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>当我们有个文件，想要在里头搜索的时候，这用起来很不错。当如果我们需要在另一个命令的输出中查找某些东西，这又该怎么办呢？是的，当然，我们可以重定向输出到文件，然后再在文件里头查找：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> fdisk </span><span class="pun">-</span><span class="pln">l</span><span class="pun">&gt;</span><span class="pln">fdisk</span><span class="pun">.</span><span class="kwd">out</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> grep </span><span class="str">"Disk /dev"</span><span class="pln"> fdisk</span><span class="pun">.</span><span class="kwd">out</span><span class="pln">
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">sda</span><span class="pun">:</span><span class="pln"> </span><span class="lit">8589</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">8589934592</span><span class="pln"> bytes
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">mapper</span><span class="pun">/</span><span class="typ">VolGroup</span><span class="pun">-</span><span class="pln">lv_root</span><span class="pun">:</span><span class="pln"> </span><span class="lit">7205</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">7205814272</span><span class="pln"> bytes
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">mapper</span><span class="pun">/</span><span class="typ">VolGroup</span><span class="pun">-</span><span class="pln">lv_swap</span><span class="pun">:</span><span class="pln"> </span><span class="lit">855</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">855638016</span><span class="pln"> bytes
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>如果你打算grep一些双引号引起来带有空格的内容呢！</p>
+<p>注意：fdisk命令显示关于Linux操作系统磁盘驱动器的信息。</p>
+<p>就像我们看到的，这种方式很不方便，因为我们不一会儿就把临时文件空间给搞乱了。要完成该任务，我们可以使用管道。它们允许我们重定向一个命令的<strong>stdout</strong>到另一个命令的<strong>stdin</strong>流：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> fdisk </span><span class="pun">-</span><span class="pln">l </span><span class="pun">|</span><span class="pln"> grep </span><span class="str">"Disk /dev"</span><span class="pln">
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">sda</span><span class="pun">:</span><span class="pln"> </span><span class="lit">8589</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">8589934592</span><span class="pln"> bytes
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">mapper</span><span class="pun">/</span><span class="typ">VolGroup</span><span class="pun">-</span><span class="pln">lv_root</span><span class="pun">:</span><span class="pln"> </span><span class="lit">7205</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">7205814272</span><span class="pln"> bytes
+</span><span class="typ">Disk</span><span class="pln"> </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">mapper</span><span class="pun">/</span><span class="typ">VolGroup</span><span class="pun">-</span><span class="pln">lv_swap</span><span class="pun">:</span><span class="pln"> </span><span class="lit">855</span><span class="pln"> MB</span><span class="pun">,</span><span class="pln"> </span><span class="lit">855638016</span><span class="pln"> bytes
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>如你所见，我们不需要任何临时文件就获得了相同的结果。我们把<strong>fdisk stdout</strong>重定向到了<strong>grep stdin</strong>。</p>
+<p><strong>注意</strong> ： 管道重定向总是从左至右的。</p>
+<p>还有几个其它重定向，但是我们将把它们放在后面讲。</p>
+<h2>在shell中显示自定义信息</h2>
+<p>正如我们所知道的，通常，与shell的交流以及shell内的交流是以对话的方式进行的。因此，让我们创建一些真正的脚本吧，这些脚本也会和我们讲话。这会让你学到一些简单的命令，并对脚本的概念有一个更好的理解。</p>
+<p>假设我们是某个公司的总服务台经理，我们想要创建某个shell脚本来注册呼叫信息：电话号码、用户名以及问题的简要描述。我们打算把这些信息存储到普通文本文件data.txt中，以便今后统计。脚本它自己就是以对话的方式工作，这会让总服务台的工作人员的小日子过得轻松点。那么，首先我们需要显示提问。对于显示信息，我们可以用echo和printf命令。这两个都是用来显示信息的，但是printf更为强大，因为我们可以通过它很好地格式化输出，我们可以让它右对齐、左对齐或者为信息留出专门的空间。让我们从一个简单的例子开始吧。要创建文件，请使用你惯用的文本编辑器（kate，nano，vi，……），然后创建名为note.sh的文件，里面写入这些命令：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">echo </span><span class="str">"Phone number ?"</span></pre>
+<h2>如何运行/执行脚本？</h2>
+<p>在保存文件后，我们可以使用bash命令来运行，把我们的文件作为它的参数：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> bash note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number </span><span class="pun">?</span></pre>
+<p>实际上，这样来执行脚本是很不方便的。如果不使用<strong>bash</strong>命令作为前缀来执行，会更舒服一些。要让脚本可执行，我们可以使用<strong>chmod</strong>命令：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> ls </span><span class="pun">-</span><span class="pln">la note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="pun">-</span><span class="pln">rw</span><span class="pun">-</span><span class="pln">r</span><span class="pun">--</span><span class="pln">r</span><span class="pun">--.</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> root root </span><span class="lit">22</span><span class="pln"> </span><span class="typ">Apr</span><span class="pln"> </span><span class="lit">23</span><span class="pln"> </span><span class="lit">20</span><span class="pun">:</span><span class="lit">52</span><span class="pln"> note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> chmod </span><span class="pun">+</span><span class="pln">x note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> ls </span><span class="pun">-</span><span class="pln">la note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="pun">-</span><span class="pln">rwxr</span><span class="pun">-</span><span class="pln">xr</span><span class="pun">-</span><span class="pln">x</span><span class="pun">.</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> root root </span><span class="lit">22</span><span class="pln"> </span><span class="typ">Apr</span><span class="pln"> </span><span class="lit">23</span><span class="pln"> </span><span class="lit">20</span><span class="pun">:</span><span class="lit">52</span><span class="pln"> note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p><img src="./Shell脚本编程初体验 _ 菜鸟教程_files/Capture.png" alt="Shell脚本编程初体验"></p>
+<p><strong>注意</strong> ： ls命令显示了当前文件夹内的文件。通过添加-la键，它会显示更多文件信息。</p>
+<p>如我们所见，在<strong>chmod</strong>命令执行前，脚本只有读（r）和写（w）权限。在执行<strong>chmod +x</strong>后，它就获得了执行（x）权限。（关于权限的更多细节，我会在下一篇文章中讲述。）现在，我们只需这么来运行：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number </span><span class="pun">?</span></pre>
+<p>在脚本名前，我添加了 ./ 组合。.(点）在unix世界中意味着当前位置（当前文件夹），/（斜线）是文件夹分隔符。（在Windows系统中，我们使用反斜线 / 表示同样功能）所以，这整个组合的意思是说："从当前文件夹执行note.sh脚本"。我想，如果我用完整路径来运行这个脚本的话，你会更加清楚一些：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">/</span><span class="pln">root</span><span class="pun">/</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number </span><span class="pun">?</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>它也能工作。</p>
+<p>如果所有linux用户都有相同的默认shell，那就万事OK。如果我们只是执行该脚本，默认的用户shell就会用于解析脚本内容并运行命令。不同的shell的语法、内部命令等等有着一丁点不同，所以，为了保证我们的脚本会使用<strong>bash</strong>，我们应该添加<strong>#!/bin/bash</strong>到文件首行。这样，默认的用户shell将调用<strong>/bin/bash</strong>，而只有在那时候，脚本中的命令才会被执行：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="com">#!/bin/bash</span><span class="pln">
+echo </span><span class="str">"Phone number ?"</span></pre>
+<p>直到现在，我们才100%确信<strong>bash</strong>会用来解析我们的脚本内容。让我们继续。</p>
+<h2>读取输入</h2>
+<p>在显示信息后，脚本会等待用户回答。有个<strong>read</strong>命令用来接收用户的回答：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="com">#!/bin/bash</span><span class="pln">
+echo </span><span class="str">"Phone number ?"</span><span class="pln">
+read phone</span></pre>
+<p>在执行后，脚本会等待用户输入，直到用户按[ENTER]键结束输入：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number </span><span class="pun">?</span><span class="pln">
+</span><span class="lit">12345</span><span class="pln">                               </span><span class="pun">&lt;---</span><span class="pln"> </span><span class="pun">这儿是我输入的内容</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>你输入的所有东西都会被存储到变量<strong>phone</strong>中，要显示变量的值，我们同样可以使用<strong>echo</strong>命令：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="com">#!/bin/bash</span><span class="pln">
+echo </span><span class="str">"Phone number ?"</span><span class="pln">
+read phone
+echo </span><span class="str">"You have entered $phone as a phone number"</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number </span><span class="pun">?</span><span class="pln">
+</span><span class="lit">123456</span><span class="pln">
+</span><span class="typ">You</span><span class="pln"> have entered </span><span class="lit">123456</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> a phone number
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>在<strong>bash</strong> shell中，一般我们使用<strong>$</strong>（美元）符号来表明这是一个变量，除了读入到变量和其它为数不多的时候才不用这个$（将在今后说明）。</p>
+<p>好了，现在我们准备添加剩下的问题了：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="com">#!/bin/bash</span><span class="pln">
+echo </span><span class="str">"Phone number?"</span><span class="pln">
+read phone
+echo </span><span class="str">"Name?"</span><span class="pln">
+read name
+echo </span><span class="str">"Issue?"</span><span class="pln">
+read issue
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">?</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Jim</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">?</span><span class="pln">
+script </span><span class="kwd">is</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> working</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<h2>使用流重定向</h2>
+<p>太完美了！剩下来就是重定向所有东西到文件data.txt了。作为字段分隔符，我们将使用/（斜线）符号。</p>
+<p><strong>注意</strong> ： 你可以选择任何你认为是最好的分隔符，但是确保文件内容不会包含这些符号在内，否则它会导致在文本行中产生额外字段。</p>
+<p>别忘了使用"&gt;&gt;"来代替"&gt;"，因为我们想要将输出内容附加到文件末！</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> tail </span><span class="pun">-</span><span class="lit">2</span><span class="pln"> note</span><span class="pun">.</span><span class="pln">sh
+read issue
+echo </span><span class="str">"$phone/$name/$issue"</span><span class="pun">&gt;&gt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">?</span><span class="pln">
+</span><span class="lit">987</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Jimmy</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Keybord</span><span class="pln"> issue</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">987</span><span class="pun">/</span><span class="typ">Jimmy</span><span class="pun">/</span><span class="typ">Keybord</span><span class="pln"> issue</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p><strong>注意</strong> ： <strong>tail</strong>命令显示了文件的最后的<strong>n</strong>行。</p>
+<p>搞定。让我们再来运行一次看看：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">?</span><span class="pln">
+</span><span class="lit">556</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Janine</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Mouse</span><span class="pln"> was broken</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">987</span><span class="pun">/</span><span class="typ">Jimmy</span><span class="pun">/</span><span class="typ">Keybord</span><span class="pln"> issue</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">556</span><span class="pun">/</span><span class="typ">Janine</span><span class="pun">/</span><span class="typ">Mouse</span><span class="pln"> was broken</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>我们的文件在增长，让我们在每行前面加个日期吧，这对于今后摆弄这些统计数据时会很有用。要实现这功能，我们可以使用date命令，并指定某种格式，因为我不喜欢默认格式：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> date
+</span><span class="typ">Thu</span><span class="pln"> </span><span class="typ">Apr</span><span class="pln"> </span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">33</span><span class="pun">:</span><span class="lit">14</span><span class="pln"> EEST </span><span class="lit">2015</span><span class="pln">                     </span><span class="pun">&lt;----</span><span class="pln"> date</span><span class="pun">命令的默认输出</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> date </span><span class="str">"+%Y.%m.%d %H:%M:%S"</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">33</span><span class="pun">:</span><span class="lit">18</span><span class="pln">                               </span><span class="pun">&lt;----</span><span class="pln"> </span><span class="pun">格式化后的输出</span></pre>
+<p>有几种方式可以读取命令的输出到变量，在这种简单的情况下，我们将使用`（是反引号，不是单引号，和波浪号~在同一个键位）：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="com">#!/bin/bash</span><span class="pln">
+now</span><span class="pun">=</span><span class="str">`date "+%Y.%m.%d %H:%M:%S"`</span><span class="pln">
+echo </span><span class="str">"Phone number?"</span><span class="pln">
+read phone
+echo </span><span class="str">"Name?"</span><span class="pln">
+read name
+echo </span><span class="str">"Issue?"</span><span class="pln">
+read issue
+echo </span><span class="str">"$now/$phone/$name/$issue"</span><span class="pun">&gt;&gt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">?</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Jim</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">?</span><span class="pln">
+</span><span class="typ">Script</span><span class="pln"> hanging</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">38</span><span class="pun">:</span><span class="lit">56</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> hanging</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>嗯…… 我们的脚本看起来有点丑啊，让我们来美化一下。如果你要手动读取<strong>read</strong>命令，你会发现read命令也可以显示一些信息。要实现该功能，我们应该使用-p键加上信息：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="com">#!/bin/bash</span><span class="pln">
+now</span><span class="pun">=</span><span class="str">`date "+%Y.%m.%d %H:%M:%S"`</span><span class="pln">
+read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Phone number: "</span><span class="pln"> phone
+read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Name: "</span><span class="pln"> name
+read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Issue: "</span><span class="pln"> issue
+echo </span><span class="str">"$now/$phone/$name/$issue"</span><span class="pun">&gt;&gt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">txt</span></pre>
+<p>你可以直接从控制台查找到各个命令的大量有趣的信息，只需输入：<strong>man read, man echo, man date, man ……</strong></p>
+<p>同意吗？它看上去是舒服多了！</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="lit">321</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Susane</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Mouse</span><span class="pln"> was stolen
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">38</span><span class="pun">:</span><span class="lit">56</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> hanging</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">43</span><span class="pun">:</span><span class="lit">50</span><span class="pun">/</span><span class="lit">321</span><span class="pun">/</span><span class="typ">Susane</span><span class="pun">/</span><span class="typ">Mouse</span><span class="pln"> was stolen
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>光标在消息的后面（不是在新的一行中），这有点意思。（LCTT 译注：如果用 echo 命令输出显示的话，可以用 -n 参数来避免换行。）</p>
+<h2>循环</h2>
+<p>是时候来改进我们的脚本了。如果用户一整天都在接电话，如果每次都要去运行，这岂不是很麻烦？让我们让这些活动都永无止境地循环去吧：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="com">#!/bin/bash</span><span class="pln">
+</span><span class="kwd">while</span><span class="pln"> </span><span class="kwd">true</span><span class="pln">
+</span><span class="kwd">do</span><span class="pln">
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Phone number: "</span><span class="pln"> phone
+        now</span><span class="pun">=</span><span class="str">`date "+%Y.%m.%d %H:%M:%S"`</span><span class="pln">
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Name: "</span><span class="pln"> name
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Issue: "</span><span class="pln"> issue
+        echo </span><span class="str">"$now/$phone/$name/$issue"</span><span class="pun">&gt;&gt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="kwd">done</span></pre>
+<p>我已经交换了<strong>read phone</strong>和<strong>now=date</strong>行的位置。这是因为我想要在输入电话号码后再获得时间。如果我把它放在循环的首行，那么循环一次后，变量 now 就会在数据存储到文件中后马上获得时间。而这并不好，因为下一次呼叫可能在20分钟后，甚至更晚。</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="lit">123</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Jim</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Script</span><span class="pln"> still </span><span class="kwd">not</span><span class="pln"> works</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="lit">777</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Daniel</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">:</span><span class="pln"> I broke </span><span class="kwd">my</span><span class="pln"> monitor
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="pun">^</span><span class="pln">C
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">38</span><span class="pun">:</span><span class="lit">56</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> hanging</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">43</span><span class="pun">:</span><span class="lit">50</span><span class="pun">/</span><span class="lit">321</span><span class="pun">/</span><span class="typ">Susane</span><span class="pun">/</span><span class="typ">Mouse</span><span class="pln"> was stolen
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">47</span><span class="pun">:</span><span class="lit">55</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> still </span><span class="kwd">not</span><span class="pln"> works</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">48</span><span class="pun">:</span><span class="lit">16</span><span class="pun">/</span><span class="lit">777</span><span class="pun">/</span><span class="typ">Daniel</span><span class="pun">/</span><span class="pln">I broke </span><span class="kwd">my</span><span class="pln"> monitor
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>注意： 要从无限循环中退出，你可以按[Ctrl]+[C]键。Shell会显示^表示 CTRL 键<sup>。</sup></p>
+<h2>使用管道重定向</h2>
+<p>让我们添加更多功能到我们的"弗兰肯斯坦（Frankenstein）"，我想要脚本在每次呼叫后显示某个统计数据。比如说，我想要查看各个号码呼叫了我几次。对于这个，我们应该cat文件data.txt：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">38</span><span class="pun">:</span><span class="lit">56</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> hanging</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">43</span><span class="pun">:</span><span class="lit">50</span><span class="pun">/</span><span class="lit">321</span><span class="pun">/</span><span class="typ">Susane</span><span class="pun">/</span><span class="typ">Mouse</span><span class="pln"> was stolen
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">47</span><span class="pun">:</span><span class="lit">55</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jim</span><span class="pun">/</span><span class="typ">Script</span><span class="pln"> still </span><span class="kwd">not</span><span class="pln"> works</span><span class="pun">.</span><span class="pln">
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">21</span><span class="pun">:</span><span class="lit">48</span><span class="pun">:</span><span class="lit">16</span><span class="pun">/</span><span class="lit">777</span><span class="pun">/</span><span class="typ">Daniel</span><span class="pun">/</span><span class="pln">I broke </span><span class="kwd">my</span><span class="pln"> monitor
+</span><span class="lit">2015.04</span><span class="pun">.</span><span class="lit">23</span><span class="pln"> </span><span class="lit">22</span><span class="pun">:</span><span class="lit">02</span><span class="pun">:</span><span class="lit">14</span><span class="pun">/</span><span class="lit">123</span><span class="pun">/</span><span class="typ">Jimmy</span><span class="pun">/</span><span class="typ">New</span><span class="pln"> script also </span><span class="kwd">not</span><span class="pln"> working</span><span class="pun">!!!</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>现在，所有输出我们都可以重定向到<strong>cut</strong>命令，让<strong>cut</strong>来把每行切成一块一块（我们使用分隔符"/"），然后打印第二个字段：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt </span><span class="pun">|</span><span class="pln"> cut </span><span class="pun">-</span><span class="pln">d</span><span class="str">"/"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">f2
+</span><span class="lit">123</span><span class="pln">
+</span><span class="lit">321</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="lit">777</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>现在，我们可以把这个输出重定向打另外一个命令<strong>sort</strong>：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt </span><span class="pun">|</span><span class="pln"> cut </span><span class="pun">-</span><span class="pln">d</span><span class="str">"/"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">f2</span><span class="pun">|</span><span class="pln">sort
+</span><span class="lit">123</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="lit">123</span><span class="pln">
+</span><span class="lit">321</span><span class="pln">
+</span><span class="lit">777</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>然后只留下唯一的行。要统计唯一条目，只需添加<strong>-c</strong>键到<strong>uniq</strong>命令：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> cat data</span><span class="pun">.</span><span class="pln">txt </span><span class="pun">|</span><span class="pln"> cut </span><span class="pun">-</span><span class="pln">d</span><span class="str">"/"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">f2 </span><span class="pun">|</span><span class="pln"> sort </span><span class="pun">|</span><span class="pln"> uniq </span><span class="pun">-</span><span class="pln">c
+    </span><span class="lit">3</span><span class="pln"> </span><span class="lit">123</span><span class="pln">
+    </span><span class="lit">1</span><span class="pln"> </span><span class="lit">321</span><span class="pln">
+    </span><span class="lit">1</span><span class="pln"> </span><span class="lit">777</span><span class="pln">
+</span><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span></pre>
+<p>只要把这个添加到我们的循环的最后：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="com">#!/bin/bash</span><span class="pln">
+</span><span class="kwd">while</span><span class="pln"> </span><span class="kwd">true</span><span class="pln">
+</span><span class="kwd">do</span><span class="pln">
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Phone number: "</span><span class="pln"> phone
+        now</span><span class="pun">=</span><span class="str">`date "+%Y.%m.%d %H:%M:%S"`</span><span class="pln">
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Name: "</span><span class="pln"> name
+        read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"Issue: "</span><span class="pln"> issue
+        echo </span><span class="str">"$now/$phone/$name/$issue"</span><span class="pun">&gt;&gt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">txt
+        echo </span><span class="str">"===== We got calls from ====="</span><span class="pln">
+        cat data</span><span class="pun">.</span><span class="pln">txt </span><span class="pun">|</span><span class="pln"> cut </span><span class="pun">-</span><span class="pln">d</span><span class="str">"/"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">f2 </span><span class="pun">|</span><span class="pln"> sort </span><span class="pun">|</span><span class="pln"> uniq </span><span class="pun">-</span><span class="pln">c
+        echo </span><span class="str">"--------------------------------"</span><span class="pln">
+</span><span class="kwd">done</span></pre>
+<p>运行：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">root@localhost </span><span class="pun">~]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">note</span><span class="pun">.</span><span class="pln">sh
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="lit">454</span><span class="pln">
+</span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Malini</span><span class="pln">
+</span><span class="typ">Issue</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Windows</span><span class="pln"> license expired</span><span class="pun">.</span><span class="pln">
+</span><span class="pun">=====</span><span class="pln"> </span><span class="typ">We</span><span class="pln"> got calls </span><span class="kwd">from</span><span class="pln"> </span><span class="pun">=====</span><span class="pln">
+    </span><span class="lit">3</span><span class="pln"> </span><span class="lit">123</span><span class="pln">
+    </span><span class="lit">1</span><span class="pln"> </span><span class="lit">321</span><span class="pln">
+    </span><span class="lit">1</span><span class="pln"> </span><span class="lit">454</span><span class="pln">
+    </span><span class="lit">1</span><span class="pln"> </span><span class="lit">777</span><span class="pln">
+</span><span class="pun">--------------------------------</span><span class="pln">
+</span><span class="typ">Phone</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> </span><span class="pun">^</span><span class="pln">C</span></pre>
+<p><img src="./Shell脚本编程初体验 _ 菜鸟教程_files/113726pspohsviiozpmdnd.png" alt="Shell脚本编程初体验"></p>
+<p>当前场景贯穿了几个熟知的步骤：</p>
+<ul>
+<li>显示消息</li>
+<li>获取用户输入</li>
+<li>存储值到文件</li>
+<li>处理存储的数据</li>
+</ul>
+<p>但是，如果用户有点责任心，他有时候需要输入数据，有时候需要统计，或者可能要在存储的数据中查找一些东西呢？对于这些事情，我们需要使用switches/cases，并知道怎样来很好地格式化输出。这对于在shell中"画"表格的时候很有用。</p>
+
+<p>来源：http://linux.cn/article-5591-1.html</p>				</div>
+			</div>
+			<div class="previous-next-links">
+			<div class="previous-design-link">← <a href="http://www.runoob.com/w3cnote/java-encryption.html" rel="prev"> Java中4大基本加密算法解析</a> </div>
+			<div class="next-design-link"><a href="http://www.runoob.com/w3cnote/web-app-tips.html" rel="next"> Web APP开发技巧总结</a> →</div>
+			</div>
+			<div class="article-heading-ad" id="w3cnote-ad728">
+				<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- 移动版 自动调整 -->
+			<ins class="adsbygoogle" style="display:inline-block;min-width:300px;max-width:970px;width:100%;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="horizontal"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+
+			</div>
+			<style>
+			@media screen and (max-width: 768px) {
+		    #w3cnote-ad728 {
+		        display: none;
+		    }
+
+}
+			</style>
+		</div>
+		
+	</div>
+	<div class="listcol last right-column">
+
+
+
+
+	<div class="tab tab-light-blue"> 订阅</div>
+	<div class="sidebar-box">
+		<div class="socialicons">
+			<a href="http://www.runoob.com/feed" class="rss">RSS 订阅</a>
+		
+			<form action="http://list.qq.com/cgi-bin/qf_compose_send" method="post">
+			<input type="hidden" value="qf_booked_feedback" name="t">
+			<input type="hidden" value="4b67b6b6c1f5e792559940cab4aebb8f1126fba880bff1a8" name="id">
+			<input class="placeholder" id="feed_email" name="to" value="输入邮箱 订阅笔记" autocomplete="off">
+			<input type="submit" value="订阅" class="btn btn-primary">
+			</form>
+		
+		</div>
+ 
+	</div>
+		
+
+
+	<div class="sidebar-box cate-list">
+	 	<div class="sidebar-box advertise-here list-link">
+			<a href="javascript:void(0);">笔记分类</a>
+		</div>
+		<div class="cate-items"> 
+<a href="http://www.runoob.com/w3cnote_genre/android" target="_blank" title="Android 基础入门教程">Android 基础入门教程</a><a href="http://www.runoob.com/w3cnote_genre/android-advance" target="_blank" title="Android 扩展教程">Android 扩展教程</a><a href="http://www.runoob.com/w3cnote_genre/jmr" target="_blank" title="JMR 使用教程">JMR 使用教程</a><a href="http://www.runoob.com/w3cnote_genre/phpsnippets" target="_blank" title="PHP 常用实例">PHP 常用实例</a><a href="http://www.runoob.com/w3cnote_genre/python-%e5%b8%b8%e7%94%a8%e5%ae%9e%e4%be%8b" target="_blank" title="Python 常用实例">Python 常用实例</a><a href="http://www.runoob.com/w3cnote_genre/net-2" target="_blank" title="互联网">互联网</a><a href="http://www.runoob.com/w3cnote_genre/disorganized" target="_blank" title="杂乱无章">杂乱无章</a><a href="http://www.runoob.com/w3cnote_genre/tech" target="_blank" title="科技资讯">科技资讯</a><a href="http://www.runoob.com/w3cnote_genre/coderlife" target="_blank" title="程序员人生">程序员人生</a><a href="http://www.runoob.com/w3cnote_genre/joke" target="_blank" title="程序员笑话">程序员笑话</a><a href="http://www.runoob.com/w3cnote_genre/code" target="_blank" title="编程技术">编程技术</a> 
+</div> 
+</div>
+	
+	 
+	 <div class="sidebar-box cate-list">
+	 	<div class="sidebar-box advertise-here list-link">
+			<a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;">教程列表</a>
+		</div>
+		<div class="cate-items"> 
+				<a href="http://www.runoob.com/ado" title="ADO，即 ActiveX 数据对象（ActiveX Data Objects），是微软公司提出的应用程序接口，用于访问关系或非关系数据库中的数据。">ADO 教程</a>
+	<a href="http://www.runoob.com/ajax" title="Ajax，即 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML），是一项在不重新加载整个页面的情况下与服务器交换数据并更新部分网页的技术。">Ajax 教程</a>
+	<a href="http://www.runoob.com/android" title="Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。">Android 教程</a>
+	<a href="http://www.runoob.com/angularjs2" title="AngularJS 2 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行。">Angular2 教程</a>
+	<a href="http://www.runoob.com/angularjs" title="AngularJS 是 Google 开发的纯客户端 JavaScript 技术的 WEB 框架，用于扩展、增强 HTML 功能，它专为构建强大的 WEB 应用而设计。">AngularJS 教程</a>
+	<a href="http://www.runoob.com/appml" title="AppML 是一个为 Web 应用程序设计的 HTML 扩展框架。AppML 结合了最新的技术和现代 Web 开发想法，使用了低消耗高速简单的架构，易于学习。">AppML 教程</a>
+	<a href="http://www.runoob.com/asp" title="ASP，即动态服务器页面（Active Server Pages），是微软公司提出的一项生成动态交互性网页的技术。ASP 是在 IIS 中运行的程序，ASP 文件中的脚本可在服务器上执行。">ASP 教程</a>
+	<a href="http://www.runoob.com/aspnet" title="ASP.NET 是微软公司提出的一个使用 HTML、CSS、JavaScript 和服务器脚本创建网页和网站的开发框架。ASP.NET 支持三种不同的开发模式：单页面模式、MVC 模式、事件驱动模式。">ASP.NET 教程</a>
+	<a href="http://www.runoob.com/bootstrap" title="Bootstrap 是 Twitter 推出的一款开源的基于 HTML、CSS、JAVASCRIPT 的前端开发框架，用于快速开发 Web 应用程序和网站。">Bootstrap 教程</a>
+	<a href="http://www.runoob.com/bootstrap4" title="Bootstrap4 目前是 Bootstrap 的最新版本，是一套用于 HTML、CSS 和 JS 开发的开源工具集。">Bootstrap4 教程</a>
+	<a href="http://www.runoob.com/cprogramming" title="C 语言是一种通用的、面向过程式的计算机程序设计语言，广泛用于系统与应用软件的开发。具有高效、灵活、功能丰富、表达力强和较高的可移植性等特点，在程序员中备受青睐。">C 教程</a>
+	<a href="http://www.runoob.com/csharp" title="C# 是微软公司发布的一种面向对象的、专为公共语言基础结构（CLI）而设计的、运行于 .NET Framework 之上的高级程序设计语言。">C# 教程</a>
+	<a href="http://www.runoob.com/cplusplus" title="C++ 进一步扩充和完善了 C 语言，是一种面向对象的程序设计语言，可运行于多种平台上。C++ 支持多种编程范式——面向对象编程、泛型编程和过程化编程。">C++ 教程</a>
+	<a href="http://www.runoob.com/cssref" title="CSS 参考手册提供了完整的 CSS 属性列表，每个属性都配有语法说明及实例演示，另外还讲解了 CSS 选择器、颜色值及浏览器支持等相关内容。">CSS 参考手册</a>
+	<a href="http://www.runoob.com/css" title="CSS，即级联样式表（Cascading Style Sheets），是一种用于表现 HTML（标准通用标记语言的一个应用）或 XML（标准通用标记语言的一个子集）等文件样式和布局的计算机语言。">CSS 教程</a>
+	<a href="http://www.runoob.com/css3" title="CSS3 是最新的 CSS 标准。CSS，即级联样式表（Cascading Style Sheets），用于表现 HTML 或 XML 等文件的样式和布局。">CSS3 教程</a>
+	<a href="http://www.runoob.com/django" title="Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC的软件设计模式，即模型M，视图V和控制器C。">Django 教程</a>
+	<a href="http://www.runoob.com/docker" title="Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中。">Docker 教程</a>
+	<a href="http://www.runoob.com/dtd" title="DTD，即文档类型定义，用于定义 XML 文档的合法构建模块。DTD 使用一系列合法的元素来定义文档的结构，可被成行地声明于 XML 文档中，也可作为一个外部引用。">DTD 教程</a>
+	<a href="http://www.runoob.com/eclipse" title="Eclipse 是一个开放源代码的、基于 Java 的可扩展开发平台。">Eclipse 教程</a>
+	<a href="http://www.runoob.com/firebug" title="Firebug 是 网页浏览器 Mozilla Firefox 下的一款开发类插件，集 HTML 查看和编辑、Javascript 控制台、网络状况监视器于一体，是开发JavaScript、CSS、HTML 和 Ajax 的得力助手。">Firebug 教程</a>
+	<a href="http://www.runoob.com/font-awesome" title="Font Awesome 是一套绝佳的图标字体库和CSS框架。">Font Awesome 图标</a>
+	<a href="http://www.runoob.com/foundation" title="Foundation 是一个易用、强大而且灵活的框架,用于构建基于任何设备上的 Web 应用。">Foundation 教程</a>
+	<a href="http://www.runoob.com/git" title="Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。">Git 教程</a>
+	<a href="http://www.runoob.com/go" title="Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。">Go 语言教程</a>
+	<a href="http://www.runoob.com/googleapi" title="Google 地图 API 是 Google 为开发者提供的创建交互式地图的应用程序编程接口。Google  地图 API 是一项免费的服务，任何非盈利性网站均可使用。">Google 地图 API 教程</a>
+	<a href="http://www.runoob.com/highcharts" title="Highcharts 是一个用纯JavaScript编写的一个图表库">Highcharts 教程</a>
+	<a href="http://www.runoob.com/htmldom" title="HTML DOM 定义了所有 HTML 元素的对象和属性，以及访问它们的方法。换言之，HTML DOM 是关于如何获取、修改、添加或删除 HTML 元素的标准。">HTML DOM 教程</a>
+	<a href="http://www.runoob.com/tags" title="HTML 参考手册提供了完整的 HTML 标签、属性、事件列表，并配有具体的实例演示，另外还讲解了拾色器、字符集等相关内容。">HTML 参考手册</a>
+	<a href="http://www.runoob.com/charsets" title="要正确显示HTML页面，浏览器必须知道页面使用的字符集（字符编码）是什么。">HTML 字符集</a>
+	<a href="http://www.runoob.com/html" title="HTML，即超文本标记语言（Hyper Text Markup Language），是一种用于描述网页的标记语言，通过标记符号来标记要显示的网页中的各个部分。">HTML 教程</a>
+	<a href="http://www.runoob.com/http" title="超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。">HTTP 教程</a>
+	<a href="http://www.runoob.com/ionic" title="ionic 是一个强大的 HTML5 应用程序开发框架(HTML5 Hybrid Mobile App Framework )。">ionic 教程</a>
+	<a href="http://www.runoob.com/ios" title="IOS 是苹果公司研发的一款手机操作系统。IOS 具有简单易用的界面、令人惊叹的功能，以及超强的稳定性，是 iPad、iPhone、iPod touch和 Apple TV 的操作系统。">iOS 教程</a>
+	<a href="http://www.runoob.com/java" title="Java 是一种跨平台的面向对象的高级程序设计语言，是由 Sun Microsystems 公司推出的 Java 程序设计语言和 Java 平台（即 JavaEE、JavaME、JavaSE）的总称。">Java 教程</a>
+	<a href="http://www.runoob.com/jsref" title="JavaScript 参考手册提供了完整的 JavaScript 对象、浏览器对象、HTML DOM 对象手册。手册包含了每个对象、属性、方法的实例。">JavaScript 参考手册</a>
+	<a href="http://www.runoob.com/js" title="JS，即 Javascript，是一种轻量级的编程语言，可插入 HTML 页面，由所有的现代浏览器执行。JS 可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。">Javascript 教程</a>
+	<a href="http://www.runoob.com/jeasyui" title="jQuery EasyUI 是一个基于 jQuery 的框架，集成了各种用户界面插件。jQuery EasyUI 框架提供了创建网页所需的一切，帮助您轻松建立站点。">jQuery EasyUI 教程</a>
+	<a href="http://www.runoob.com/jquerymobile" title="jQuery Mobile 是用于创建移动 Web 应用的前端开发框架。jQuery Mobile 使用 HTML5 &amp; CSS3 最小的脚本来布局网页，可以应用于智能手机与平板电脑。">jQuery Mobile 教程</a>
+	<a href="http://www.runoob.com/jqueryui" title="jQuery UI 是建立在 jQuery JavaScript 库上的一组用户界面交互、特效、小部件及主题，可用于创建高度交互的 Web 应用程序。">jQuery UI 教程</a>
+	<a href="http://www.runoob.com/jquery" title="jQuery 是目前最流行的一个轻量级的兼容多浏览器的 JavaScript  框架。jQuery 提供了大量的插件，极大地简化了 JavaScript 编程。">jQuery 教程</a>
+	<a href="http://www.runoob.com/json" title="JSON，即 JavaScript Object Notation（JavaScript 对象表示法），是存储和交换文本信息的语法。JSON 类似 XML，但比 XML 更小、更快，更易解析。">JSON 教程</a>
+	<a href="http://www.runoob.com/jsp" title="JSP，即 Java Server Pages，是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的 Web 网页的技术标准。">JSP 教程</a>
+	<a href="http://www.runoob.com/kotlin" title="Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。Kotlin可以编译成Java字节码，也可以编译成JavaScript，方便在没有JVM的设备上运行。">Kotlin 教程</a>
+	<a href="http://www.runoob.com/linux" title="Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。">Linux 教程</a>
+	<a href="http://www.runoob.com/lua" title="Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放。">Lua 教程</a>
+	<a href="http://www.runoob.com/memcached" title="Memcached是一个自由开源的，高性能，分布式内存对象缓存系统。它很普通，却可以用来减轻数据库负载，从而为动态web应用加速。">Memcached 教程</a>
+	<a href="http://www.runoob.com/mongodb" title="MongoDB 是由 C++ 语言编写的开源数据库系统，是一个基于分布式文件存储的数据库，旨在为 Web 应用提供可扩展的高性能数据存储解决方案。">MongoDB 教程</a>
+	<a href="http://www.runoob.com/mysql" title="MySQL 是一个开源的小型关系型数据库管理系统。在 Web 应用方面，MySQL是最好的 RDBMS（关系数据库管理系统）应用软件之一。">MySQL 教程</a>
+	<a href="http://www.runoob.com/nodejs" title="Node.js 是一个基于 Chrome JavaScript 运行时建立的一个平台，是一个基于 Google 的 V8 引擎的事件驱动 I/O 服务端 JavaScript 环境。">Node.js 教程</a>
+	<a href="http://www.runoob.com/perl" title="Perl，一种功能丰富的计算机程序语言，运行在超过100种计算机平台上，适用广泛，从大型机到便携设备，从快速原型创建到大规模可扩展开发。">Perl 教程</a>
+	<a href="http://www.runoob.com/php" title="PHP，即 PHP: Hypertext Preprocessor，是一种创建动态交互性站点的强有力的服务器端脚本语言。PHP 是开源的，可免费下载使用。">PHP 教程</a>
+	<a href="http://www.runoob.com/python3" title="Python的3.0版本，常被称为Python 3000，或简称Py3k。相对于Python的早期版本，这是一个较大的升级。为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。">Python 3 教程</a>
+	<a href="http://www.runoob.com/python" title="Python 是一种解释型、面向对象、动态数据类型的高级程序设计语言。Python 支持从简单的文字处理到 WWW 浏览器再到游戏等应用程序的开发。">Python 基础教程</a>
+	<a href="http://www.runoob.com/rdf" title="RDF，即资源描述框架（Resource Description Framework），是用于描述网络资源的 W3C 标准，比如网页的标题、作者、修改日期、内容以及版权信息。">RDF 教程</a>
+	<a href="http://www.runoob.com/react" title="React 是一个用于构建用户界面的 JAVASCRIPT 库。">React 教程</a>
+	<a href="http://www.runoob.com/redis" title="Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。">Redis 教程</a>
+	<a href="http://www.runoob.com/rss" title="RSS，即真正简易联合（Really Simple Syndication），是一种使用 XML 编写的描述和同步网站内容的格式，定义了非常简单的方法来共享和查看标题和内容。">RSS 教程</a>
+	<a href="http://www.runoob.com/ruby" title="Ruby 是一种开源的面向对象程序设计的服务器端脚本语言，在 20 世纪 90 年代中期由日本的松本行弘设计并开发。Ruby 可用于编写通用网关接口（CGI）脚本，可用于开发 Internet 和 Intranet 应用。">Ruby 教程</a>
+	<a href="http://www.runoob.com/scala" title="Scala 是一门多范式（multi-paradigm）的编程语言，设计初衷是要集成面向对象编程和函数式编程的各种特性。">Scala 教程</a>
+	<a href="http://www.runoob.com/servlet" title="Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。Servlet 运行于支持 Java 的应用服务器中，它最常见的用途是扩展 Web 服务器。">Servlet 教程</a>
+	<a href="http://www.runoob.com/soap" title="SOAP，即简易对象访问协议，是基于 XML 的简易协议，可使应用程序在 HTTP 之上进行信息交换。简单地说，SOAP 是用于访问网络服务的协议。">SOAP 教程</a>
+	<a href="http://www.runoob.com/sql" title="SQL，即结构化查询语言（Structured Query Language），是一种 ANSI 标准的计算机语言，用于访问和处理数据库。">SQL 教程</a>
+	<a href="http://www.runoob.com/sqlite" title="SQLite 是一款轻型的关系型数据库管理系统，实现了自给自足的、无服务器的、零配置的、事务性的 SQL 数据库引擎。SQLite 是在世界上最广泛部署的 SQL 数据库引擎。">SQLite 教程</a>
+	<a href="http://www.runoob.com/svg" title="SVG，即可缩放矢量图形（Scalable Vector Graphics），是一种使用 XML 来描述二维图形和绘图程序的语言。SVG 是 W3C 推荐标准。">SVG 教程</a>
+	<a href="http://www.runoob.com/svn" title="SVN是Subversion的简称，是一个开放源代码的版本控制系统，相较于RCS、CVS，它采用了分支管理系统，它的设计目标就是取代CVS。">SVN 教程</a>
+	<a href="http://www.runoob.com/swift" title="Swift 是一种支持多编程范式和编译式的编程语言,苹果于2014年WWDC（苹果开发者大会）发布，用于开发 iOS，OS X 和 watchOS应用程序。">Swift 教程</a>
+	<a href="http://www.runoob.com/tcpip" title="TCP/IP 是因特网的通信协议，是对计算机必须遵守的规则的描述，只有遵守这些规则，计算机之间才能进行通信。浏览器与服务器是使用 TCP/IP 协议来链接因特网的。">TCP/IP 教程</a>
+	<a href="http://www.runoob.com/vbscript" title="VBScript，即 Visual Basic Script，是微软公司开发的一种解析型的服务端（也支持客户端）脚本语言，可以看作是 VB 语言的简化版。">VBScript 教程</a>
+	<a href="http://www.runoob.com/vue2" title="Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的渐进式框架。">Vue.js 教程</a>
+	<a href="http://www.runoob.com/w3c" title="W3C，即万维网联盟，创建于 1994 年，是 Web 技术领域最具权威和影响力的国际中立性技术标准机构。W3C 让每个人都能在互联网上分享资源。">W3C 教程</a>
+	<a href="http://www.runoob.com/webservices" title="Web Service 是使用开放协议进行通信的可重复使用的应用程序组件。通过使用 Web services，您可以在不同的应用程序与平台之间来交换数据。">Web Service 教程</a>
+	<a href="http://www.runoob.com/wsdl" title="WSDL，即网络服务描述语言（Web Services Description Language），是一门基于 XML 的语言，用于描述 Web Services 以及如何对它们进行访问。">WSDL 教程</a>
+	<a href="http://www.runoob.com/xlink" title="XLink 定义在 XML 文档中创建超级链接的标准方法。XPointer 允许这些超级链接指向 XML 文档中的更多具体部分（片断）。XLink 和 XPointer 是 W3C 推荐标准。">XLink 教程</a>
+	<a href="http://www.runoob.com/dom" title="XML DOM 定义了所有 XML 元素的对象和属性，以及访问它们的方法。换言之，XML DOM 是用于获取、更改、添加或删除 XML 元素的标准。">XML DOM 教程</a>
+	<a href="http://www.runoob.com/schema" title="XML Schema 是基于 XML（可扩展标记语言），描述了 XML 文档的合法构建模块，可替代 DTD（文档类型定义）。XML Schema 是 W3C 的推荐标准。">XML Schema 教程</a>
+	<a href="http://www.runoob.com/xml" title="XML，即可扩展标记语言（eXtensible Markup Language），用来传输和存储数据。XML 是一个 W3C 推荐标准。">XML 教程</a>
+	<a href="http://www.runoob.com/xpath" title="XPath，即 XML 路径语言，是 XSLT 中的主要元素，是一种在 XML 文档中查找信息的语言。XPath 是一个 W3C 推荐标准。">XPath 教程</a>
+	<a href="http://www.runoob.com/xquery" title="XQuery 是建立在 XPath 表达式之上，用于 XML 数据查询的语言。XQuery 对 XML 的作用类似 SQL 对数据库的作用。XQuery 是一个 W3C 推荐标准。">XQuery 教程</a>
+	<a href="http://www.runoob.com/xslfo" title="XSL-FO，即可扩展样式表语言格式化对象（Extensible Stylesheet Language Formatting Objects），是用于格式化 XML 数据的语言。XSL-FO 是一个 W3C 推荐标准。">XSLFO 教程</a>
+	<a href="http://www.runoob.com/xsl" title="XSLT，即 XSL 转换，是一种用于将 XML 文档转换为 XHTML 文档或其他 XML 文档的语言。XSL 指扩展样式表语言，是一种 XML 文档的样式表语言。XSLT 是一个 W3C 推荐标准。">XSLT 教程</a>
+	<a href="http://www.runoob.com/regexp" title="正则表达式，又称正规表示法、常规表示法，使用单个字符串来描述、匹配一系列符合某个句法规则的字符串，通常被用来检索、替换那些符合某个模式的文本。">正则表达式</a>
+	<a href="http://www.runoob.com/quiz" title="测验">测验</a>
+	<a href="http://www.runoob.com/browsers" title="浏览器是用于显示网页服务器或档案系统内的文件，并让用户与这些文件互动的一种软件。目前主流浏览器包括 Internet Explorer、Firefox、Chrome、Safari、Opera 等。">浏览器</a>
+	<a href="http://www.runoob.com/quality" title="通过学习重要的 Web 标准，根据 Web 标准编写页面，有助于改善网站品质，创建高质量的 Web 网站，让网站更加简易且可读性更强。">网站品质</a>
+	<a href="http://www.runoob.com/web" title="网站建设指南介绍了一个网站开发人员建设一个专业的网站必须掌握的知识，同时还讲解了网站验证、Web 语义化、搜索引擎优化等相关内容。">网站建设指南</a>
+	<a href="http://www.runoob.com/hosting" title="Web 服务器可存放网站，只有将存放在服务器上的网站进行发布，用户才能在客户端上浏览网站。网站主机服务通常包括了域名注册、电子邮件等。">网站服务器教程</a>
+	<a href="http://www.runoob.com/design-pattern" title="设计模式（Design pattern）是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。 ">设计模式</a>
+			
+		</div> 
+	 </div>
+</div>
+	</div>
+</div>
+
+
+<!-- 底部 -->
+
+
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       ·<a target="_blank" href="http://www.runoob.com/jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       ·<a target="_blank" href="http://www.runoob.com/java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&amp;工具
+      </dt>
+      <dd>
+       · <a target="_blank" href="http://www.runoob.com/charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       · <a target="_blank" href="http://www.runoob.com/tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       · <a target="_blank" href="http://www.runoob.com/tags/ref-entities.html">HTML ISO-8859-1</a>
+      </dd> 
+      <dd>
+       · <a target="_blank" href="http://www.runoob.com/tags/html-symbols.html">HTML 实体符号</a>
+      </dd>
+      <dd>
+       · <a target="_blank" href="http://www.runoob.com/tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       · <a target="_blank" href="http://c.runoob.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                   <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/website-reward-button.html" title="网站打赏按钮制作">网站打赏按钮制作</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/open-source-license.html" title="各种开源协议介绍">各种开源协议介绍</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/tencent-open-source.html" title="腾讯关于微信和移动开发的 10 大开源项目">腾讯关于微信和...</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/programmer-facial-package-summary.html" title="程序员在开发各阶段专属表情包汇总">程序员在开发各...</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/these-pain-only-programmers-know.html" title="这些痛，只有程序员懂…">这些痛，只有程...</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/java-protected-keyword-detailed-explanation.html" title="Java protected 关键字详解">Java protected ...</a>
+      </dd>
+              <dd>
+       ·
+      <a href="http://www.runoob.com/w3cnote/funny-programmer-pictures.html" title="给程序员的几条建议，精彩配图">给程序员的几条...</a>
+      </dd>
+             </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       ·
+       <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=ssbDyoOAgfLU3crf09venNHd3w" rel="external nofollow">意见反馈</a>
+      </dd>
+      <dd>
+       ·
+      <a target="_blank" href="http://www.runoob.com/disclaimer">免责声明</a>
+       </dd>
+        <dd>
+       ·
+      <a href="javascript:void(0)" onclick="dashangToggle()" style="font-weight:bold;color:#f00;" title="打赏，支持一下">打赏一下</a>
+       </dd>
+      <dd>
+       ·
+       <a target="_blank" href="http://www.runoob.com/aboutus">关于我们</a>
+       </dd>
+      <dd>
+       ·
+      <a target="_blank" href="http://www.runoob.com/archives">文章归档</a>
+      </dd>
+      
+     </dl>
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+            <img width="128" height="128" src="./Shell脚本编程初体验 _ 菜鸟教程_files/qrcode.png">
+       </div>
+     </div>
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright © 2013-2018    <strong><a href="http://www.runoob.com/" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="http://www.runoob.com/" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：闽ICP备15012807号-1
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部"> <i class="fa fa-angle-up"></i></a>
+    <a class="qrcode" href="javascript:void(0)" title="关注我们"><i class="fa fa-qrcode"></i></a>
+    <a class="writer" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=ssbDyoOAgfLU3crf09venNHd3w" style="font-size: 12px;" title="Bug 反馈"><i class="fa fa-envelope-o" style="font-size: 20px;"></i></a>
+    <!-- qrcode modal -->
+    <div id="bottom-qrcode" class="modal panel-modal hide fade in">
+      <h4>微信关注</h4>
+      <div class="panel-body"><img alt="微信关注" width="128" height="128" src="./Shell脚本编程初体验 _ 菜鸟教程_files/qrcode.png"></div> 
+    </div>
+  </div>
+
+  <div class="hide_box"></div>
+    <div class="shang_box">
+      <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="./Shell脚本编程初体验 _ 菜鸟教程_files/close.jpg" alt="取消"></a>
+       
+      <div class="shang_tit">
+        <p>感谢您的支持，我会继续努力的!</p>
+      </div>
+      <div class="shang_payimg">
+        <img src="./Shell脚本编程初体验 _ 菜鸟教程_files/alipayimg.png" alt="扫码支持" title="扫一扫">
+      </div>
+        <div class="pay_explain">扫码打赏，你说多少就多少</div>
+      <div class="shang_payselect">
+        <div class="pay_item checked" data-id="alipay">
+          <span class="radiobox"></span>
+          <span class="pay_logo"><img src="./Shell脚本编程初体验 _ 菜鸟教程_files/alipay.jpg" alt="支付宝"></span>
+        </div>
+        <div class="pay_item" data-id="weipay">
+          <span class="radiobox"></span>
+          <span class="pay_logo"><img src="./Shell脚本编程初体验 _ 菜鸟教程_files/wechat.jpg" alt="微信"></span>
+        </div>
+      </div>
+      <div class="shang_info">
+        <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+        <p><a href="https://c.runoob.com/codedemo/5348" target="_blank"><span style=" font-size: 14px;color: #000;font-weight: bold;">点我查看本站打赏源码！</span></a></p>
+      </div>
+    </div>
+  <div id="testClick"></div>
+ <div style="display:none;">
+ 
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?8e2a116daf0104a78d601f40a45c75b4";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</div>
+<script>
+window.jsui={
+    www: '//wwww.runoob.com',
+    uri: '//www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+<style>
+ol,ul{list-style:none}.cd-switcher a{text-decoration:none;outline:0}.cd-switcher a:hover{text-decoration:underline}a:focus{outline:0;-moz-outline:0}.main_nav{width:300px;height:60px;margin:60px auto 10px auto}.main_nav li{float:left;width:60px;margin-right:10px;font-size:16px;padding:.6em 1em;border-radius:3em;background:#2f889a;text-align:center}.main_nav li a{color:#fff}.errtip{background-color:#fceaea;color:#db5353;padding:8px 15px;font-size:14px;border:1px solid #fc9797;border-radius:5px}.cd-user-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(52,54,66,0.9);z-index:3;overflow-y:auto;cursor:pointer;visibility:hidden;opacity:0;-webkit-transition:opacity .3s 0,visibility 0 .3s;-moz-transition:opacity .3s 0,visibility 0 .3s;transition:opacity .3s 0,visibility 0 .3s}.cd-user-modal.is-visible{visibility:visible;opacity:1;-webkit-transition:opacity .3s 0,visibility 0 0;-moz-transition:opacity .3s 0,visibility 0 0;transition:opacity .3s 0,visibility 0 0}.cd-user-modal.is-visible .cd-user-modal-container{-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);transform:translateY(0)}.cd-user-modal-container{position:relative;width:90%;max-width:500px;background:#FFF;margin:3em auto 4em;cursor:auto;border-radius:.25em;-webkit-transform:translateY(-30px);-moz-transform:translateY(-30px);-ms-transform:translateY(-30px);-o-transform:translateY(-30px);transform:translateY(-30px);-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;transition-property:transform;-webkit-transition-duration:.3s;-moz-transition-duration:.3s;transition-duration:.3s}.cd-user-modal-container .cd-switcher:after{content:"";display:table;clear:both}.cd-user-modal-container .cd-switcher li{width:50%;float:left;text-align:center}.cd-user-modal-container .cd-switcher li:first-child a{border-radius:.25em 0 0 0}.cd-user-modal-container .cd-switcher li:last-child a{border-radius:0 .25em 0 0}.cd-user-modal-container .cd-switcher a{font-size:1.2em;font-weight:bold;display:block;width:100%;height:50px;line-height:50px;background:#e8f1e2;color:#96b880}.cd-user-modal-container .cd-switcher a.selected{background:#FFF;color:#505260}@media only screen and (min-width:600px){.cd-user-modal-container{margin:4em auto}.cd-user-modal-container .cd-switcher a{height:70px;line-height:70px}}.cd-form{padding:1.4em}.cd-form .fieldset{position:relative;margin:1.4em 0}.cd-form .fieldset:first-child{margin-top:0}.cd-form .fieldset:last-child{margin-bottom:0}.cd-form label{font-size:16px;font-size:.875rem}.cd-form label.image-replace{display:inline-block;position:absolute;left:15px;top:50%;bottom:auto;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%);height:20px;width:20px;overflow:hidden;text-indent:100%;white-space:nowrap;color:transparent;text-shadow:none;background-repeat:no-repeat;background-position:50% 0}.cd-form label.cd-username{background-image:url("/wp-content/themes/runoob/assets/img/cd-icon-username.svg")}.cd-form label.cd-email{background-image:url("/wp-content/themes/runoob/assets/img/cd-icon-email.svg")}.cd-form label.cd-password{background-image:url("/wp-content/themes/runoob/assets/img/cd-icon-password.svg")}.cd-form input{margin:0;padding:0;border-radius:.25em}.cd-form input.full-width{width:80%}.cd-form input.full-width2{width:94%}.cd-form input.has-padding{padding:12px 20px 12px 50px}.cd-form input.has-border{border:1px solid #d2d8d8;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none}.cd-form input.has-border:focus{border-color:#98b880;box-shadow:0 0 5px rgba(52,54,66,0.1);outline:0}.cd-form input.has-error{border:1px solid #d76666}.cd-form input[type=password]{padding-right:65px}.cd-form input[type=submit]{padding:16px 0;cursor:pointer;background:#96b97d;color:#FFF;font-weight:bold;border:0;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none;font-size:1.2em;font-weight:bold}.no-touch .cd-form input[type=submit]:hover,.no-touch .cd-form input[type=submit]:focus{background:#3599ae;outline:0}@media only screen and (min-width:600px){.cd-form{padding:2em}.cd-form .fieldset{margin:2em 0}.cd-form .fieldset:first-child{margin-top:0}.cd-form .fieldset:last-child{margin-bottom:0}.cd-form input.has-padding{padding:16px 20px 16px 50px}.cd-form input[type=submit]{padding:16px 0}}.cd-close-form{display:block;position:absolute;width:40px;height:40px;right:0;top:-40px;background:url("/wp-content/themes/runoob/assets/img/cd-icon-close.svg") no-repeat center center;text-indent:100%;white-space:nowrap;overflow:hidden}@media only screen and (min-width:1170px){}#cd-login,#cd-signup,#cd-reset-password{display:none}#cd-login.is-selected,#cd-signup.is-selected,#cd-reset-password.is-selected{display:block}
+</style>
+<div class="cd-user-modal"> 
+	<div class="cd-user-modal-container">
+		<ul class="cd-switcher">
+			<li><a href="javascript:;">用户登录</a></li>
+			<li><a href="javascript:;">注册新用户</a></li>
+		</ul>
+
+		<div id="cd-login"> <!-- 登录表单 -->
+			<div class="cd-form">
+				<p class="fieldset">
+					<label class="image-replace cd-username" for="signin-username">用户名</label>
+					<input class="full-width has-padding has-border" id="signin-username" name="username" type="text" placeholder="输入用户名">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signin-password">密码</label>
+					<input class="full-width has-padding has-border" id="signin-password" name="password" type="password" placeholder="输入密码">
+				</p>
+				
+				<p class="fieldset">
+					<input type="checkbox" id="remember-me" checked="">
+					<label for="remember-me">记住登录状态</label>
+          <a href="http://www.runoob.com/reset-password" style="float: right;padding-right: 20px;" target="_blank">忘记密码？</a>
+				</p>
+ 				<input type="hidden" name="action" value="signin">
+				<p class="fieldset">
+					<input class="full-width2" type="submit" value="登 录">
+				</p>
+        <div class="err-msg"></div>
+			</div>
+		</div>
+
+		<div id="cd-signup"> <!-- 注册表单 -->
+			<div class="cd-form">
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="verifycode">邀请码</label>
+					<input class="full-width has-padding has-border" id="signup-verifycode" name="verifycode" type="text" placeholder="输入邀请码">
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username" for="signup-username">用户名</label>
+					<input class="full-width has-padding has-border" id="signup-username" name="name" type="text" placeholder="输入用户名">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-email" for="signup-email">邮箱</label>
+					<input class="full-width has-padding has-border" name="email" id="signup-email" type="email" placeholder="输入mail">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signup-password">密码</label>
+					<input class="full-width has-padding has-border" id="signup-password" name="password" type="password" placeholder="输入密码">
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signup-password2">重复输入密码</label>
+					<input class="full-width has-padding has-border" id="signup-password2" name="password2" type="password" placeholder="重复输入密码">
+				</p>
+				
+				<!-- 
+				<p class="fieldset">
+					<input type="checkbox" id="accept-terms">
+					<label for="accept-terms">我已阅读并同意 <a href="javascript:;">用户协议</a></label>
+				</p>
+				 -->
+				 
+				 <input type="hidden" name="action" value="signup">
+				<p class="fieldset">
+					<input class="full-width2" type="submit" value="注册新用户">
+				</p>
+				<p class="fieldset">
+				  <a href="http://www.runoob.com/w3cnote/runoob-user-test-intro.html#invite" target="_blank">如何获取邀请码？</a>
+				  </p>
+				<div class="err-msg"></div>
+			</div>
+
+		</div>
+
+		<a href="javascript:;" class="cd-close-form">关闭</a>
+	</div>
+</div> 
+<script src="./Shell脚本编程初体验 _ 菜鸟教程_files/main.js.下载"></script>
+
+
+<st-div id="__selection-translator__"> <st-div class="__st-box__" style="display: none; position: fixed; z-index: 99999; left: 0px; top: 0px; transform: translateX(738px) translateY(761px);"> <st-header> <st-span class="st-icon-pin" title="固定"></st-span> <st-span class="st-icon-down-open" title="展开"></st-span> <st-span class="st-icon-cog" title="设置"></st-span> </st-header> <st-div class="__query-form__" style="display: none;"> <st-div> <textarea placeholder="输入要翻译的句子或单词"></textarea> </st-div> <st-div> <select> <option value="">自动判断</option> <option value="zh">中文</option><option value="zh-CN">中文(简体)</option><option value="zh-HK">中文(香港)</option><option value="zh-TW">中文(繁体)</option><option value="en">英语</option><option value="ja">日语</option><option value="ko">朝鲜语</option><option value="de">德语</option><option value="fr">法语</option><option value="ru">俄语</option><option value="th">泰语</option><option value="af">南非语</option><option value="ar">阿拉伯语</option><option value="az">阿塞拜疆语</option><option value="be">比利时语</option><option value="bg">保加利亚语</option><option value="ca">加泰隆语</option><option value="cs">捷克语</option><option value="cy">威尔士语</option><option value="da">丹麦语</option><option value="dv">第维埃语</option><option value="el">希腊语</option><option value="eo">世界语</option><option value="es">西班牙语</option><option value="et">爱沙尼亚语</option><option value="eu">巴士克语</option><option value="fa">法斯语</option><option value="fi">芬兰语</option><option value="fo">法罗语</option><option value="gl">加里西亚语</option><option value="gu">古吉拉特语</option><option value="he">希伯来语</option><option value="hi">印地语</option><option value="hr">克罗地亚语</option><option value="hu">匈牙利语</option><option value="hy">亚美尼亚语</option><option value="id">印度尼西亚语</option><option value="is">冰岛语</option><option value="it">意大利语</option><option value="ka">格鲁吉亚语</option><option value="kk">哈萨克语</option><option value="kn">卡纳拉语</option><option value="kok">孔卡尼语</option><option value="ky">吉尔吉斯语</option><option value="lt">立陶宛语</option><option value="lv">拉脱维亚语</option><option value="mi">毛利语</option><option value="mk">马其顿语</option><option value="mn">蒙古语</option><option value="mr">马拉地语</option><option value="ms">马来语</option><option value="mt">马耳他语</option><option value="nb">挪威语(伯克梅尔)</option><option value="nl">荷兰语</option><option value="ns">北梭托语</option><option value="pa">旁遮普语</option><option value="pl">波兰语</option><option value="pt">葡萄牙语</option><option value="qu">克丘亚语</option><option value="ro">罗马尼亚语</option><option value="sa">梵文</option><option value="se">北萨摩斯语</option><option value="sk">斯洛伐克语</option><option value="sl">斯洛文尼亚语</option><option value="sq">阿尔巴尼亚语</option><option value="sv">瑞典语</option><option value="sw">斯瓦希里语</option><option value="syr">叙利亚语</option><option value="ta">泰米尔语</option><option value="te">泰卢固语</option><option value="tl">塔加路语</option><option value="tn">茨瓦纳语</option><option value="tr">土耳其语</option><option value="ts">宗加语</option><option value="tt">鞑靼语</option><option value="uk">乌克兰语</option><option value="ur">乌都语</option><option value="uz">乌兹别克语</option><option value="vi">越南语</option><option value="xh">班图语</option><option value="zu">祖鲁语</option> </select> <st-div class="__exchange__"> <st-span class="st-icon-exchange"></st-span> </st-div> <select> <option value="">自动选择</option> <option value="zh">中文</option><option value="zh-CN">中文(简体)</option><option value="zh-HK">中文(香港)</option><option value="zh-TW">中文(繁体)</option><option value="en">英语</option><option value="ja">日语</option><option value="ko">朝鲜语</option><option value="de">德语</option><option value="fr">法语</option><option value="ru">俄语</option><option value="th">泰语</option><option value="af">南非语</option><option value="ar">阿拉伯语</option><option value="az">阿塞拜疆语</option><option value="be">比利时语</option><option value="bg">保加利亚语</option><option value="ca">加泰隆语</option><option value="cs">捷克语</option><option value="cy">威尔士语</option><option value="da">丹麦语</option><option value="dv">第维埃语</option><option value="el">希腊语</option><option value="eo">世界语</option><option value="es">西班牙语</option><option value="et">爱沙尼亚语</option><option value="eu">巴士克语</option><option value="fa">法斯语</option><option value="fi">芬兰语</option><option value="fo">法罗语</option><option value="gl">加里西亚语</option><option value="gu">古吉拉特语</option><option value="he">希伯来语</option><option value="hi">印地语</option><option value="hr">克罗地亚语</option><option value="hu">匈牙利语</option><option value="hy">亚美尼亚语</option><option value="id">印度尼西亚语</option><option value="is">冰岛语</option><option value="it">意大利语</option><option value="ka">格鲁吉亚语</option><option value="kk">哈萨克语</option><option value="kn">卡纳拉语</option><option value="kok">孔卡尼语</option><option value="ky">吉尔吉斯语</option><option value="lt">立陶宛语</option><option value="lv">拉脱维亚语</option><option value="mi">毛利语</option><option value="mk">马其顿语</option><option value="mn">蒙古语</option><option value="mr">马拉地语</option><option value="ms">马来语</option><option value="mt">马耳他语</option><option value="nb">挪威语(伯克梅尔)</option><option value="nl">荷兰语</option><option value="ns">北梭托语</option><option value="pa">旁遮普语</option><option value="pl">波兰语</option><option value="pt">葡萄牙语</option><option value="qu">克丘亚语</option><option value="ro">罗马尼亚语</option><option value="sa">梵文</option><option value="se">北萨摩斯语</option><option value="sk">斯洛伐克语</option><option value="sl">斯洛文尼亚语</option><option value="sq">阿尔巴尼亚语</option><option value="sv">瑞典语</option><option value="sw">斯瓦希里语</option><option value="syr">叙利亚语</option><option value="ta">泰米尔语</option><option value="te">泰卢固语</option><option value="tl">塔加路语</option><option value="tn">茨瓦纳语</option><option value="tr">土耳其语</option><option value="ts">宗加语</option><option value="tt">鞑靼语</option><option value="uk">乌克兰语</option><option value="ur">乌都语</option><option value="uz">乌兹别克语</option><option value="vi">越南语</option><option value="xh">班图语</option><option value="zu">祖鲁语</option> </select> </st-div> <st-div> <select> <option value="YouDao">有道翻译</option> <option value="BaiDu">百度翻译</option> <option value="Google">谷歌翻译</option> <option value="GoogleCN">谷歌翻译（国内）</option> </select> <st-div class="__action-list__"> <st-div class="__button__ __btn-translate__">翻译 <st-span class="st-icon-down-dir"></st-span> </st-div> <st-div class="__expand__"> <st-div class="__button__">朗读</st-div> <st-div class="__button__">复制</st-div> </st-div> </st-div> </st-div> </st-div> <st-div class="__translate-result__" style="display: none;">正在查询，请稍候……</st-div> <st-div class="__translate-result__"> <st-div style="display: none;"> <st-span></st-span> <st-span class="__retry__">重试</st-span> </st-div> <st-div> <st-div class="__phonetic__"> <st-span style="display: none;"></st-span> <st-span class="__copy-and-read__"> <st-span>朗读</st-span> <st-span style="display: none;">复制</st-span> </st-span> </st-div> <st-div style="display: none;"> <st-ul>  </st-ul> <st-div class="__copy-and-read__"> <st-span class="__copy-and-read__">复制</st-span> </st-div> </st-div> <st-div style="display: none;">  <st-div class="__copy-and-read__"> <st-span class="__copy-and-read__">朗读</st-span> <st-span class="__copy-and-read__">复制</st-span> </st-div> </st-div> </st-div> </st-div> <st-footer> <st-span style="">via <a target="_blank" href="http://www.runoob.com/w3cnote/shell-scripting.html">谷歌翻译（国内）</a></st-span> </st-footer> </st-div> <st-div class="__st-btn__" style="display: none; position: fixed; z-index: 99999; left: 0px; top: 0px; transform: translateX(738px) translateY(761px);">译</st-div> </st-div></body></html>
